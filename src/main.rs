@@ -28,10 +28,24 @@ fn main() {
             } else {
                 println!("EOF  null"); 
             }
+            
+            tokenize(&file_contents)
         }
         _ => {
             writeln!(io::stderr(), "Unknown command: {}", command).unwrap();
             return;
         }
     }
+}
+
+fn tokenize(input: &str){
+    for chars in input.chars() {
+        match chars {
+            '(' => println!("LEFT_PAREN ( null"),
+            ')' => println!("RIGHT_PAREN ) null"),
+            _ => {}
+        }
+    }
+
+    println!("EOF  null");
 }
