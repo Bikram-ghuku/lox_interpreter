@@ -1,7 +1,7 @@
 use std::env;
 use std::fs;
 use std::io::{self, Write};
-
+use std::process;
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() < 3 {
@@ -53,7 +53,10 @@ fn tokenize(input: &str){
             ';' => println!("SEMICOLON ; null"),
             '\n' => { x += 1 },
             ' ' => {},
-            _ => println!("[Line {}] Error: Unexpected character: {}", x, chars)
+            _ => {
+                println!("[Line {}] Error: Unexpected character: {}", x, chars);
+                process::exit(65);
+            }
         }
     }
 
