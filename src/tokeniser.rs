@@ -8,6 +8,7 @@ pub fn tokenize(input: &str){
     let mut chars = input.chars().peekable();
     while let Some(c) = chars.next() {
         match c {
+ // --------------------------------------------------------------------------------------------------------------------------
             '(' => tokens.push("LEFT_PAREN ( null".to_string()),
             ')' => tokens.push("RIGHT_PAREN ) null".to_string()),
             '{' => tokens.push("LEFT_BRACE { null".to_string()),
@@ -21,6 +22,7 @@ pub fn tokenize(input: &str){
             '\n' => { x += 1 },
             ' ' => {},
             '\t' => {},
+// --------------------------------------------------------------------------------------------------------------------------
             '=' => {
                 if tokens.last() == Some(&"EQUAL = null".to_string()) {
                     tokens.pop();
@@ -54,6 +56,7 @@ pub fn tokenize(input: &str){
                     tokens.push("SLASH / null".to_string())
                 }
             },
+ // --------------------------------------------------------------------------------------------------------------------------
             '"' => {
                 accept_str = true;
                 let mut literal : String = String::new();
@@ -75,6 +78,7 @@ pub fn tokenize(input: &str){
                     literal.push(ctrim);
                 }
             },
+// --------------------------------------------------------------------------------------------------------------------------
             '0'..='9' => {
                 let mut dec_det = false;
                 let mut num_literal : String = String::from(c);
@@ -115,6 +119,7 @@ pub fn tokenize(input: &str){
                 }
 
             },
+// --------------------------------------------------------------------------------------------------------------------------
             s if s.is_alphabetic() || s == '_' => {
                 let mut identifiers: String = String::from(s);
                 while let Some(c) = chars.peek() {
@@ -128,13 +133,14 @@ pub fn tokenize(input: &str){
 
                 tokens.push(format!("IDENTIFIER {} null", identifiers));
             },
+// --------------------------------------------------------------------------------------------------------------------------
             _ => {
                 tokens.push("Error".to_string());
                 eprintln!("[line {}] Error: Unexpected character: {}", x, c);
                 had_error = true;
             }
         }
-
+// --------------------------------------------------------------------------------------------------------------------------
         if accept_str{
             eprintln!("[line {}] Error: Unterminated string.", x);
             had_error = true;
