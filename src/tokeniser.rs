@@ -76,7 +76,31 @@ pub fn tokenize(input: &str){
                 }
             },
             '0'..='9' => {
+                let mut dec_det = false;
+                let mut num_literal : String = String::from(c);
+                while let Some(c) = chars.next(){
+                    if c == '.' && !dec_det{
+                        num_literal.push(c);
+                        dec_det = true;
+                    }else if c.is_digit(10){
+                        num_literal.push(c);
+                    }else{
+                        break;
+                    }
+                }
                 
+                if num_literal.ends_with('.') {
+                    num_literal.push('0');
+                }
+                
+                if num_literal.ends_with(".0") {
+                    tokens.push(format!("NUMBER {} {}", num_literal.replace(".0", ""), num_literal));
+                } else if !num_literal.contains('.'){
+                    tokens.push(format!("NUMBER {} {}.0", num_literal, num_literal));
+                }else{
+                    tokens.push(format!("NUMBER {} {}", num_literal, num_literal));
+                }
+
             },
             _ => {
                 tokens.push("Error".to_string());
