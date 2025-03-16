@@ -91,6 +91,14 @@ fn tokenize(input: &str){
                     println!("GREATER > null")
                 }
             },
+            '/' => {
+                let mut peekable = chars.clone().peekable();
+                if peekable.next() == Some('/'){
+                    chars.next();
+                }else{
+                    println!("SLASH / null")
+                }
+            },
             _ => {
                 eprintln!("[line {}] Error: Unexpected character: {}", x, c);
                 had_error = true;
