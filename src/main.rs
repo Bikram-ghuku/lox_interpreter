@@ -96,6 +96,7 @@ fn tokenize(input: &str){
                 if peekable.next() == Some('/'){
                     while let Some(ctrim) = chars.next(){
                         if ctrim == '\n'{
+                            x += 1;
                             break;
                         }
                     }
