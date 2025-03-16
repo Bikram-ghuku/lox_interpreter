@@ -48,6 +48,7 @@ fn tokenize(input: &str){
             ',' => println!("COMMA , null"),
             '+' => println!("PLUS + null"),
             '.' => println!("DOT . null"),
+            '-' => println!("MINUS - null"),
             _ => {}
         }
     }
