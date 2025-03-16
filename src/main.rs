@@ -39,6 +39,7 @@ fn main() {
 
 fn tokenize(input: &str){
     let mut x : i32 = 1;
+    let mut had_error= false;
     for chars in input.chars() {
         match chars {
             '(' => println!("LEFT_PAREN ( null"),
@@ -55,10 +56,13 @@ fn tokenize(input: &str){
             ' ' => {},
             _ => {
                 eprintln!("[line {}] Error: Unexpected character: {}", x, chars);
-                process::exit(65);
+                had_error = true;
             }
         }
     }
 
     println!("EOF  null");
+    if had_error {
+        process::exit(65);
+    }
 }
