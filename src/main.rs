@@ -38,6 +38,7 @@ fn main() {
 }
 
 fn tokenize(input: &str){
+    let mut x : i32 = 1;
     for chars in input.chars() {
         match chars {
             '(' => println!("LEFT_PAREN ( null"),
@@ -50,7 +51,9 @@ fn tokenize(input: &str){
             '.' => println!("DOT . null"),
             '-' => println!("MINUS - null"),
             ';' => println!("SEMICOLON ; null"),
-            _ => {}
+            '\n' => { x += 1 },
+            ' ' => {},
+            _ => println!("[Line {}] Error: Unexpected character: {}", x, chars)
         }
     }
 
