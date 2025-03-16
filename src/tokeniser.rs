@@ -1,4 +1,3 @@
-use core::num;
 use std::process;
 
 pub fn tokenize(input: &str){
@@ -89,9 +88,7 @@ pub fn tokenize(input: &str){
                         break;
                     }
                 }
-                while num_literal.ends_with('0') {
-                    num_literal.pop();
-                }
+
                 if num_literal.ends_with('.') {
                     num_literal.push('0');
                 }
@@ -101,7 +98,17 @@ pub fn tokenize(input: &str){
                 } else if !num_literal.contains('.'){
                     tokens.push(format!("NUMBER {} {}.0", num_literal, num_literal));
                 }else{
-                    tokens.push(format!("NUMBER {} {}", num_literal, num_literal));
+                    let mut no_trail_zero : String = num_literal.clone();
+                    let mut zer_rem: bool = false;
+                    while no_trail_zero.ends_with('0') {
+                        no_trail_zero.pop();
+                        zer_rem = true;
+                    }
+
+                    if zer_rem {
+                        no_trail_zero.push('0');
+                    }
+                    tokens.push(format!("NUMBER {} {}", num_literal, no_trail_zero));
                 }
 
             },
