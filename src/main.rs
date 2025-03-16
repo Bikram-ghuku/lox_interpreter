@@ -55,6 +55,7 @@ fn tokenize(input: &str){
             ';' => println!("SEMICOLON ; null"),
             '\n' => { x += 1 },
             ' ' => {},
+            '\t' => {},
             '=' => {
                 let mut peekable = chars.clone().peekable();
                 if peekable.next() == Some('=') {
