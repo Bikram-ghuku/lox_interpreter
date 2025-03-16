@@ -54,7 +54,7 @@ fn tokenize(input: &str){
             '\n' => { x += 1 },
             ' ' => {},
             _ => {
-                println!("[line {}] Error: Unexpected character: {}", x, chars);
+                eprintln!("[line {}] Error: Unexpected character: {}", x, chars);
                 process::exit(65);
             }
         }
