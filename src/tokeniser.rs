@@ -1,3 +1,4 @@
+use core::num;
 use std::process;
 
 pub fn tokenize(input: &str){
@@ -88,7 +89,9 @@ pub fn tokenize(input: &str){
                         break;
                     }
                 }
-                
+                while num_literal.ends_with('0') {
+                    num_literal.pop();
+                }
                 if num_literal.ends_with('.') {
                     num_literal.push('0');
                 }
