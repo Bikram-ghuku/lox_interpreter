@@ -90,6 +90,23 @@ fn tokenize(input: &str){
                     tokens.push("SLASH / null".to_string())
                 }
             },
+            '\"' => {
+                let mut literal : String = String::new();
+                while let Some(ctrim) = chars.next() {
+                    if ctrim == '\"' {
+                        tokens.push(format!("STRING \"{}\" {}", literal, literal));
+                        break;
+                    }
+
+                    if ctrim == '\n' {
+                        eprintln!("[line {}] Error: Unterminated string.", x);
+                        had_error = true;
+                        break;
+                    }
+                    
+                    literal.push(ctrim);
+                }
+            }
             _ => {
                 eprintln!("[line {}] Error: Unexpected character: {}", x, c);
                 had_error = true;
