@@ -23,14 +23,12 @@ fn main() {
             });
 
 
-            if !file_contents.is_empty() {
-                panic!("Scanner not implemented");
-                tokenize(&file_contents);
+            if !file_contents.is_empty() { 
+                tokenize(&file_contents)
             } else {
                 println!("EOF  null"); 
             }
             
-            tokenize(&file_contents)
         }
         _ => {
             writeln!(io::stderr(), "Unknown command: {}", command).unwrap();
