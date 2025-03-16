@@ -115,6 +115,19 @@ pub fn tokenize(input: &str){
                 }
 
             },
+            s if s.is_alphabetic() || s == '_' => {
+                let mut identifiers: String = String::from(s);
+                while let Some(c) = chars.peek() {
+                    if c.is_alphanumeric() || *c == '_' {
+                        identifiers.push(*c);
+                        chars.next();
+                    }else{
+                        break;
+                    }
+                }
+
+                tokens.push(format!("IDENTIFIER {} null", identifiers));
+            },
             _ => {
                 tokens.push("Error".to_string());
                 eprintln!("[line {}] Error: Unexpected character: {}", x, c);
