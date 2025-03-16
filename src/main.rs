@@ -126,7 +126,7 @@ fn tokenize(input: &str){
     }
 
     for token in &tokens{
-        if token == Some("Error"){
+        if token == "Error" {
             continue;
         }
         println!("{}",token)
