@@ -41,6 +41,7 @@ fn tokenize(input: &str){
     let mut tokens : Vec<String> = Vec::new();
     let mut x : i32 = 1;
     let mut had_error= false;
+    let mut accept_str = false;
     let mut chars = input.chars();
     while let Some(c) = chars.next() {
         match c {
@@ -90,17 +91,21 @@ fn tokenize(input: &str){
                     tokens.push("SLASH / null".to_string())
                 }
             },
-            '\"' => {
+            '"' => {
+                accept_str = true;
                 let mut literal : String = String::new();
                 while let Some(ctrim) = chars.next() {
-                    if ctrim == '\"' {
-                        tokens.push(format!("STRING \"{}\" {}", literal, literal));
-                        break;
-                    }
 
                     if ctrim == '\n' {
+                        accept_str = false;
                         eprintln!("[line {}] Error: Unterminated string.", x);
                         had_error = true;
+                        continue;
+                    }
+
+                    if ctrim == '"' {
+                        accept_str = false;
+                        tokens.push(format!("STRING \"{}\" {}", literal, literal));
                         break;
                     }
                     
@@ -111,6 +116,11 @@ fn tokenize(input: &str){
                 eprintln!("[line {}] Error: Unexpected character: {}", x, c);
                 had_error = true;
             }
+        }
+
+        if accept_str{
+            eprintln!("[line {}] Error: Unterminated string.", x);
+            had_error = true;
         }
     }
 
