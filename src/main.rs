@@ -25,7 +25,7 @@ fn main() {
 
             if !file_contents.is_empty() {
                 panic!("Scanner not implemented");
-                tokenize(file_contents);
+                tokenize(&file_contents);
             } else {
                 println!("EOF  null"); 
             }
