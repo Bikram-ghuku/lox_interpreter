@@ -113,6 +113,7 @@ fn tokenize(input: &str){
                 }
             }
             _ => {
+                tokens.push("Error".to_string());
                 eprintln!("[line {}] Error: Unexpected character: {}", x, c);
                 had_error = true;
             }
@@ -125,6 +126,9 @@ fn tokenize(input: &str){
     }
 
     for token in &tokens{
+        if token == Some("Error"){
+            continue;
+        }
         println!("{}",token)
     }
     println!("EOF  null");
