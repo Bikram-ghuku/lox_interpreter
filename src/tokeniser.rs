@@ -102,13 +102,13 @@ pub fn tokenize(input: &str){
                     tokens.push(format!("NUMBER {} {}.0", num_literal, num_literal));
                 }else{
                     let mut no_trail_zero : String = num_literal.clone();
-                    let mut zer_rem: bool = false;
+                    let mut zer_rem: i8 = 0;
                     while no_trail_zero.ends_with('0') {
                         no_trail_zero.pop();
-                        zer_rem = true;
+                        zer_rem += 1;
                     }
 
-                    if zer_rem {
+                    if zer_rem > 1{
                         no_trail_zero.push('0');
                     }
                     tokens.push(format!("NUMBER {} {}", num_literal, no_trail_zero));

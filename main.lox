@@ -8,3 +8,12 @@
 (90+56) > 69 != ("Success" != "Failure") != (63 >= 31)
 
 foo bar _hello
+
+{
+// This is a complex test case
+str1 = "Test"
+str2 = "Case"
+num1 = 100
+num2 = 200.00
+result = (str1 == str2) != ((num1 + num2) >= 300)
+}
