@@ -5,7 +5,7 @@ pub fn tokenize(input: &str){
     let mut x : i32 = 1;
     let mut had_error= false;
     let mut accept_str = false;
-    let mut chars = input.chars();
+    let mut chars = input.chars().peekable();
     while let Some(c) = chars.next() {
         match c {
             '(' => tokens.push("LEFT_PAREN ( null".to_string()),
@@ -78,12 +78,15 @@ pub fn tokenize(input: &str){
             '0'..='9' => {
                 let mut dec_det = false;
                 let mut num_literal : String = String::from(c);
-                while let Some(c) = chars.next(){
-                    if c == '.' && !dec_det{
-                        num_literal.push(c);
+
+                while let Some(c) = chars.peek(){
+                    if *c == '.' && !dec_det{
+                        num_literal.push(*c);
                         dec_det = true;
+                        chars.next();
                     }else if c.is_digit(10){
-                        num_literal.push(c);
+                        num_literal.push(*c);
+                        chars.next();
                     }else{
                         break;
                     }
