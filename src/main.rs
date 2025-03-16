@@ -40,8 +40,9 @@ fn main() {
 fn tokenize(input: &str){
     let mut x : i32 = 1;
     let mut had_error= false;
-    for chars in input.chars() {
-        match chars {
+    let mut chars = input.chars();
+    while let Some(c) = chars.next() {
+        match c {
             '(' => println!("LEFT_PAREN ( null"),
             ')' => println!("RIGHT_PAREN ) null"),
             '{' => println!("LEFT_BRACE {{ null"),
@@ -54,8 +55,17 @@ fn tokenize(input: &str){
             ';' => println!("SEMICOLON ; null"),
             '\n' => { x += 1 },
             ' ' => {},
+            '=' => {
+                let mut peekable = chars.clone().peekable();
+                if peekable.next() == Some('=') {
+                    println!("EQUAL_EQUAL == null");
+                    chars.next();
+                }else{
+                    println!("EQUAL = null")
+                }
+            },
             _ => {
-                eprintln!("[line {}] Error: Unexpected character: {}", x, chars);
+                eprintln!("[line {}] Error: Unexpected character: {}", x, c);
                 had_error = true;
             }
         }
