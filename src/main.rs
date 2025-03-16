@@ -94,7 +94,11 @@ fn tokenize(input: &str){
             '/' => {
                 let mut peekable = chars.clone().peekable();
                 if peekable.next() == Some('/'){
-                    chars.next();
+                    while let Some(ctrim) = chars.next(){
+                        if ctrim == '\n'{
+                            break;
+                        }
+                    }
                 }else{
                     println!("SLASH / null")
                 }
