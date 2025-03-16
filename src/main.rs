@@ -72,7 +72,25 @@ fn tokenize(input: &str){
                 }else{
                     println!("BANG ! null")
                 }
-            }
+            },
+            '<' => {
+                let mut peekable = chars.clone().peekable();
+                if peekable.next() == Some('='){
+                    println!("LESS_EQUAL <= null");
+                    chars.next();
+                }else{
+                    println!("LESS < null")
+                }
+            },
+            '>' => {
+                let mut peekable = chars.clone().peekable();
+                if peekable.next() == Some('='){
+                    println!("GREATER_EQUAL >= null");
+                    chars.next();
+                }else{
+                    println!("GREATER > null")
+                }
+            },
             _ => {
                 eprintln!("[line {}] Error: Unexpected character: {}", x, c);
                 had_error = true;
