@@ -38,60 +38,45 @@ fn main() {
 }
 
 fn tokenize(input: &str){
+    let mut tokens : Vec<String> = Vec::new();
     let mut x : i32 = 1;
     let mut had_error= false;
     let mut chars = input.chars();
     while let Some(c) = chars.next() {
         match c {
-            '(' => println!("LEFT_PAREN ( null"),
-            ')' => println!("RIGHT_PAREN ) null"),
-            '{' => println!("LEFT_BRACE {{ null"),
-            '}' => println!("RIGHT_BRACE }} null"),
-            '*' => println!("STAR * null"),
-            ',' => println!("COMMA , null"),
-            '+' => println!("PLUS + null"),
-            '.' => println!("DOT . null"),
-            '-' => println!("MINUS - null"),
-            ';' => println!("SEMICOLON ; null"),
+            '(' => tokens.push("LEFT_PAREN ( null".to_string()),
+            ')' => tokens.push("RIGHT_PAREN ) null".to_string()),
+            '{' => tokens.push("LEFT_BRACE { null".to_string()),
+            '}' => tokens.push("RIGHT_BRACE } null".to_string()),
+            '*' => tokens.push("STAR * null".to_string()),
+            ',' => tokens.push("COMMA , null".to_string()),
+            '+' => tokens.push("PLUS + null".to_string()),
+            '.' => tokens.push("DOT . null".to_string()),
+            '-' => tokens.push("MINUS - null".to_string()),
+            ';' => tokens.push("SEMICOLON ; null".to_string()),
             '\n' => { x += 1 },
             ' ' => {},
             '\t' => {},
             '=' => {
-                let mut peekable = chars.clone().peekable();
-                if peekable.next() == Some('=') {
-                    println!("EQUAL_EQUAL == null");
-                    chars.next();
-                }else{
-                    println!("EQUAL = null")
+                if tokens.last() == Some(&"EQUAL = null".to_string()) {
+                    tokens.pop();
+                    tokens.push("EQUAL_EQUAL == null".to_string());
+                } else if tokens.last() == Some(&"BANG ! null".to_string()){
+                    tokens.pop();
+                    tokens.push("BANG_EQUAL != null".to_string());
+                } else if tokens.last() == Some(&"LESS < null".to_string()){
+                    tokens.pop();
+                    tokens.push("LESS_EQUAL <= null".to_string());
+                }else if tokens.last() == Some(&"GREATER > null".to_string()){
+                    tokens.pop();
+                    tokens.push("GREATER_EQUAL >= null".to_string());
+                } else {
+                    tokens.push("EQUAL = null".to_string());
                 }
             },
-            '!' => {
-                let mut peekable = chars.clone().peekable();
-                if peekable.next() == Some('='){
-                    println!("BANG_EQUAL != null");
-                    chars.next();
-                }else{
-                    println!("BANG ! null")
-                }
-            },
-            '<' => {
-                let mut peekable = chars.clone().peekable();
-                if peekable.next() == Some('='){
-                    println!("LESS_EQUAL <= null");
-                    chars.next();
-                }else{
-                    println!("LESS < null")
-                }
-            },
-            '>' => {
-                let mut peekable = chars.clone().peekable();
-                if peekable.next() == Some('='){
-                    println!("GREATER_EQUAL >= null");
-                    chars.next();
-                }else{
-                    println!("GREATER > null")
-                }
-            },
+            '!' => tokens.push("BANG ! null".to_string()),
+            '<' => tokens.push("LESS < null".to_string()),
+            '>' => tokens.push("GREATER > null".to_string()),
             '/' => {
                 let mut peekable = chars.clone().peekable();
                 if peekable.next() == Some('/'){
@@ -102,7 +87,7 @@ fn tokenize(input: &str){
                         }
                     }
                 }else{
-                    println!("SLASH / null")
+                    tokens.push("SLASH / null".to_string())
                 }
             },
             _ => {
@@ -112,6 +97,9 @@ fn tokenize(input: &str){
         }
     }
 
+    for token in &tokens{
+        println!("{}",token)
+    }
     println!("EOF  null");
     if had_error {
         process::exit(65);
