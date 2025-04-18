@@ -1,6 +1,4 @@
-use std::process;
-
-pub fn tokenize(input: &str){
+pub fn tokenize(input: &str) -> (Vec<String>, bool){
     let mut tokens : Vec<String> = Vec::new();
     let mut x : i32 = 1;
     let mut had_error= false;
@@ -166,15 +164,5 @@ pub fn tokenize(input: &str){
             had_error = true;
         }
     }
-
-    for token in &tokens{
-        if token == "Error" {
-            continue;
-        }
-        println!("{}",token)
-    }
-    println!("EOF  null");
-    if had_error {
-        process::exit(65);
-    }
+    (tokens, had_error)
 }
