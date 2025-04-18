@@ -134,6 +134,7 @@ pub fn tokenize(input: &str){
                 match identifiers.as_str() {
                     "and" => tokens.push(format!("AND {} null", identifiers)),
                     "class" =>  tokens.push(format!("CLASS {} null", identifiers)),
+                    "else" => tokens.push(format!("ELSE {} null", identifiers)),
                     "false" => tokens.push(format!("FALSE {} null", identifiers)),
                     "for" => tokens.push(format!("FOR {} null", identifiers)),
                     "fun" => tokens.push(format!("FUN {} null", identifiers)),
