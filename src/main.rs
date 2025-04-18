@@ -31,8 +31,9 @@ fn main() {
                     if token.starts_with("Error "){
                         let res = token.trim_start_matches("Error ");
                         eprintln!("{}", res);
+                    }else{
+                        println!("{}",token)
                     }
-                    println!("{}",token)
                 }
                 println!("EOF  null");
                 if had_error {

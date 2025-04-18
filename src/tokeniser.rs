@@ -1,5 +1,3 @@
-use std::fmt::format;
-
 pub fn tokenize(input: &str) -> (Vec<String>, bool){
     let mut tokens : Vec<String> = Vec::new();
     let mut x : i32 = 1;
@@ -163,7 +161,8 @@ pub fn tokenize(input: &str) -> (Vec<String>, bool){
         }
 // --------------------------------------------------------------------------------------------------------------------------
         if accept_str{
-            eprintln!("[line {}] Error: Unterminated string.", x);
+            let msg = format!("[line {}] Error: Unterminated string.", x);
+            tokens.push(format!("Error {}", msg));
             had_error = true;
         }
     }
