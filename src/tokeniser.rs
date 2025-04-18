@@ -151,18 +151,18 @@ pub fn tokenize(input: &str) -> (Vec<String>, bool){
                     }
                 }
             },
-            '\r' => {
-            }
+            '\r' => {}
 // --------------------------------------------------------------------------------------------------------------------------
             _ => {
-                tokens.push("Error".to_string());
-                eprintln!("[line {}] Error: Unexpected character: {}", x, c);
+                let msg = format!("[line {}] Error: Unexpected character: {}", x, c);
+                tokens.push(format!("Error {}", msg));
                 had_error = true;
             }
         }
 // --------------------------------------------------------------------------------------------------------------------------
         if accept_str{
-            eprintln!("[line {}] Error: Unterminated string.", x);
+            let msg = format!("[line {}] Error: Unterminated string.", x);
+            tokens.push(format!("Error {}", msg));
             had_error = true;
         }
     }
