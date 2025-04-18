@@ -131,7 +131,26 @@ pub fn tokenize(input: &str){
                     }
                 }
 
-                tokens.push(format!("IDENTIFIER {} null", identifiers));
+                match identifiers.as_str() {
+                    "and" => tokens.push(format!("AND {} null", identifiers)),
+                    "class" =>  tokens.push(format!("CLASS {} null", identifiers)),
+                    "false" => tokens.push(format!("FALSE {} null", identifiers)),
+                    "for" => tokens.push(format!("FOR {} NULL", identifiers)),
+                    "fun" => tokens.push(format!("FUN {} NULL", identifiers)),
+                    "if" => tokens.push(format!("IF {} NULL", identifiers)),
+                    "nil" => tokens.push(format!("NIL {} NULL", identifiers)),
+                    "or" => tokens.push(format!("OR {} NULL", identifiers)),
+                    "print" => tokens.push(format!("PRINT {} NULL", identifiers)),
+                    "return" => tokens.push(format!("RETURN {} NULL", identifiers)),
+                    "super" => tokens.push(format!("SUPER {} NULL", identifiers)),
+                    "this" => tokens.push(format!("THIS {} NULL", identifiers)),
+                    "true" => tokens.push(format!("TRUE {} NULL", identifiers)),
+                    "var" => tokens.push(format!("VAR {} NULL", identifiers)),
+                    "while" => tokens.push(format!("WHILE {} NULL", identifiers)),
+                    _ => {
+                        tokens.push(format!("IDENTIFIER {} null", identifiers));
+                    }
+                }
             },
 // --------------------------------------------------------------------------------------------------------------------------
             _ => {
