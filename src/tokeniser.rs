@@ -141,11 +141,11 @@ pub fn tokenize(input: &str){
                     "if" => tokens.push(format!("IF {} null", identifiers)),
                     "nil" => tokens.push(format!("NIL {} null", identifiers)),
                     "or" => tokens.push(format!("OR {} null", identifiers)),
-                    "print" => tokens.push(format!("PRINT {}null", identifiers)),
+                    "print" => tokens.push(format!("PRINT {} null", identifiers)),
                     "return" => tokens.push(format!("RETURN {} null", identifiers)),
                     "super" => tokens.push(format!("SUPER {} null", identifiers)),
                     "this" => tokens.push(format!("THIS {} null", identifiers)),
-                    "true" => tokens.push(format!("TRUE {}null", identifiers)),
+                    "true" => tokens.push(format!("TRUE {} null", identifiers)),
                     "var" => tokens.push(format!("VAR {} null", identifiers)),
                     "while" => tokens.push(format!("WHILE {} null", identifiers)),
                     _ => {
