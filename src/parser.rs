@@ -10,6 +10,11 @@ pub fn parse(input: &str){
                 let chs: Vec<&str> = st.split(" ").collect();
                 parse.push(format!("{}", chs[1]));
             }
+
+            st if st.starts_with("NUMBER") => {
+                let chs: Vec<&str> = st.split(" ").collect();
+                parse.push(format!("{}", chs[2]));
+            }
            _ => {}
         }
     }
