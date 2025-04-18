@@ -15,6 +15,10 @@ pub fn parse(input: &str){
                 let chs: Vec<&str> = st.split(" ").collect();
                 parse.push(format!("{}", chs[2]));
             }
+            st if st.starts_with("STRING") => {
+                let chs: Vec<&str> = st.split(" ").collect();
+                parse.push(format!("{}", chs[2]));
+            }
            _ => {}
         }
     }
