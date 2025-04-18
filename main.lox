@@ -11,7 +11,7 @@ foo bar _hello
 
 {
     // This is a complex test case
-    str1 = "Test"
+    str1 = "Test Not Op"
     str2 = "Case"
     num1 = 100
     num2 = 200.00
